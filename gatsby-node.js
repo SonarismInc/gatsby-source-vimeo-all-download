@@ -1,10 +1,10 @@
 "use strict";
 
-const fs = require('fs');
+const fs = require("fs");
 
-const crypto = require('crypto');
+const crypto = require("crypto");
 
-const Vimeo = require('vimeo').Vimeo;
+const Vimeo = require("vimeo").Vimeo;
 
 const defaultOptions = {};
 let hasVideoFiles = false;
@@ -30,8 +30,8 @@ exports.sourceNodes = async ({
   const client = new Vimeo(clientId, clientSecret, accessToken);
   const videos = await new Promise((resolve, reject) => {
     client.request({
-      method: 'GET',
-      path: '/me/videos' // /me/videos/{id}
+      method: "GET",
+      path: "/me/videos?per_page=100" // /me/videos/{id}
 
     }, (error, body, status_code, headers) => {
       if (error) reject(error);
@@ -42,7 +42,7 @@ exports.sourceNodes = async ({
   hasVideoFiles = videoFiles.length !== 0;
 
   if (!hasVideoFiles) {
-    console.info('Can\'t access video files through Vimeo API on this account. Won\'t create "VimeoSrcset" fragment.');
+    console.info("Can't access video files through Vimeo API on this account. Won't create \"VimeoSrcset\" fragment.");
     console.info('Please make sure that you\'re on a Pro plan and that "private" and "video_files" are in the scope of your token.');
   }
 
@@ -55,6 +55,7 @@ exports.sourceNodes = async ({
       aspectRatio: video.width / video.height,
       description: video.description,
       pictures: video.pictures,
+      download: video.download,
       user: video.user,
       link: video.link,
       duration: video.duration
@@ -62,8 +63,8 @@ exports.sourceNodes = async ({
     createNode({ // Data for the node.
       ...nodeData,
       // Required fields.
-      id: video.uri.split('/')[2],
-      parent: '__SOURCE__',
+      id: video.uri.split("/")[2],
+      parent: "__SOURCE__",
       // or null if it's a source node without a parent
       children: [],
       internal: {
