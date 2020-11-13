@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-vimeo-all-download",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "gatsby source plugin to get vimeo videos and info",
   "author": "Sonarism, Inc. - Usama Minegishi <support@sonarism.com>",
   "license": "0BSD",
