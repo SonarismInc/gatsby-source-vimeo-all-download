@@ -16,14 +16,14 @@ exports.sourceNodes = async (
   pluginOptions
 ) => {
   const options = { ...defaultOptions, ...pluginOptions };
-  const { clientId, clientSecret, accessToken } = options;
+  const { clientId, clientSecret, accessToken, portfolioId } = options;
 
   const client = new Vimeo(clientId, clientSecret, accessToken);
   const videos = await new Promise((resolve, reject) => {
     client.request(
       {
         method: "GET",
-        path: "/me/videos?per_page=100", // /me/videos/{id}
+        path: `/me/portfolios/${portfolioId}/videos?per_page=100&sort=manual`, // /me/videos/{id}
       },
       (error, body, status_code, headers) => {
         if (error) reject(error);
