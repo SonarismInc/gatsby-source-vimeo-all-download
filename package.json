@@ -1,7 +1,7 @@
 {
   "name": "gatsby-source-vimeo-all-download",
-  "version": "0.0.2",
-  "description": "gatsby source plugin to get vimeo videos and info",
+  "version": "0.0.3",
+  "description": "gatsby source plugin to get videso from one vimeo collection",
   "author": "Sonarism, Inc. - Usama Minegishi <support@sonarism.com>",
   "license": "0BSD",
   "main": "gatsby-node.js",
